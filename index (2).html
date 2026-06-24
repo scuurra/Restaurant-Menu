@@ -49,25 +49,13 @@
       pointer-events: none;
     }
 
-    .logo-ring {
-      width: 72px; height: 72px;
-      border: 1.5px solid var(--accent);
-      border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      margin: 0 auto 20px;
-      font-size: 28px;
+    .logo-img {
+      width: 220px;
+      height: auto;
+      display: block;
+      margin: 0 auto 4px;
+      border-radius: 12px;
     }
-
-    .brand-name {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(42px, 11vw, 82px);
-      font-weight: 700;
-      letter-spacing: 0.02em;
-      line-height: 1;
-      color: var(--white);
-    }
-
-    .brand-name span { color: var(--accent); }
 
     .brand-line {
       width: 48px; height: 1.5px;
@@ -207,8 +195,7 @@
 <body>
 
 <header>
-  <div class="logo-ring">🍔</div>
-  <h1 class="brand-name">Quik<span>Food</span></h1>
+  <img src="Quik-logo2-removebg-preview.png" alt="Quik Food" class="logo-img"/>
   <div class="brand-line"></div>
   <p class="brand-tagline">Food &amp; Glace · Mostaganem</p>
 </header>
