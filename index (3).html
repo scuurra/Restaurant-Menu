@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Sablettes — Menu</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --sand:    #F5EFE0;
+      --dune:    #D9C9A3;
+      --ocean:   #1B4D6B;
+      --seafoam: #4E8FA0;
+      --ink:     #1A1A18;
+      --mist:    #7A8C8E;
+      --white:   #FDFAF4;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--sand);
+      color: var(--ink);
+      font-family: 'Jost', sans-serif;
+      font-weight: 300;
+      min-height: 100vh;
+    }
+
+    /* ── HERO ── */
+    header {
+      background: var(--ocean);
+      color: var(--white);
+      text-align: center;
+      padding: 60px 24px 48px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    header::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 50% 110%, rgba(78,143,160,0.35) 0%, transparent 70%),
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='120'%3E%3Cpath d='M0 60 Q100 20 200 60 Q300 100 400 60 Q500 20 600 60 Q700 100 800 60 L800 120 L0 120Z' fill='%234E8FA0' opacity='.18'/%3E%3Cpath d='M0 80 Q133 40 266 80 Q400 120 533 80 Q666 40 800 80 L800 120 L0 120Z' fill='%234E8FA0' opacity='.12'/%3E%3C/svg%3E") bottom/cover no-repeat;
+      pointer-events: none;
+    }
+
+    .restaurant-eyebrow {
+      font-family: 'Jost', sans-serif;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--dune);
+      margin-bottom: 16px;
+    }
+
+    .restaurant-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(52px, 10vw, 96px);
+      font-weight: 300;
+      letter-spacing: 0.06em;
+      line-height: 1;
+      margin-bottom: 12px;
+    }
+
+    .restaurant-tagline {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: clamp(15px, 3vw, 20px);
+      color: var(--dune);
+      margin-bottom: 36px;
+    }
+
+    /* wave divider */
+    .wave {
+      display: block;
+      width: 100%;
+      height: 48px;
+      margin-top: -1px;
+      color: var(--sand);
+    }
+
+    /* ── NAV TABS ── */
+    .nav-wrap {
+      position: sticky;
+      top: 0;
+      z-index: 99;
+      background: var(--sand);
+      border-bottom: 1px solid var(--dune);
+    }
+
+    nav {
+      display: flex;
+      justify-content: center;
+      gap: 0;
+      overflow-x: auto;
+      scrollbar-width: none;
+      max-width: 720px;
+      margin: 0 auto;
+    }
+
+    nav::-webkit-scrollbar { display: none; }
+
+    nav a {
+      text-decoration: none;
+      color: var(--mist);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      padding: 14px 20px;
+      white-space: nowrap;
+      border-bottom: 2px solid transparent;
+      transition: color .2s, border-color .2s;
+    }
+
+    nav a:hover, nav a.active {
+      color: var(--ocean);
+      border-bottom-color: var(--ocean);
+    }
+
+    /* ── MAIN LAYOUT ── */
+    main {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 0 20px 80px;
+    }
+
+    /* ── SECTION ── */
+    .menu-section {
+      padding-top: 56px;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+
+    .section-line {
+      flex: 1;
+      height: 1px;
+      background: var(--dune);
+    }
+
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 28px;
+      font-weight: 400;
+      letter-spacing: 0.08em;
+      color: var(--ocean);
+      white-space: nowrap;
+    }
+
+    .section-icon {
+      font-size: 18px;
+    }
+
+    /* ── DISH CARD ── */
+    .dish-list {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .dish {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      grid-template-rows: auto auto;
+      column-gap: 16px;
+      padding: 18px 0;
+      border-bottom: 1px solid rgba(217,201,163,0.45);
+      transition: background .15s;
+    }
+
+    .dish:last-child { border-bottom: none; }
+
+    .dish-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 20px;
+      font-weight: 400;
+      color: var(--ink);
+      grid-column: 1;
+      grid-row: 1;
+      align-self: center;
+    }
+
+    .dish-badges {
+      display: inline-flex;
+      gap: 6px;
+      margin-left: 8px;
+      vertical-align: middle;
+    }
+
+    .badge {
+      font-family: 'Jost', sans-serif;
+      font-size: 9px;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 2px 6px;
+      border-radius: 2px;
+    }
+
+    .badge-veg  { background: #d4edda; color: #2d6a4f; }
+    .badge-new  { background: var(--ocean); color: var(--white); }
+    .badge-spicy{ background: #fce8d5; color: #9c4a1a; }
+
+    .dish-desc {
+      font-size: 13px;
+      color: var(--mist);
+      line-height: 1.55;
+      grid-column: 1;
+      grid-row: 2;
+      margin-top: 4px;
+    }
+
+    .dish-price {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--seafoam);
+      grid-column: 2;
+      grid-row: 1 / 3;
+      align-self: center;
+      white-space: nowrap;
+    }
+
+    /* ── SPECIALS banner ── */
+    .specials-banner {
+      background: var(--ocean);
+      color: var(--white);
+      border-radius: 6px;
+      padding: 24px 28px;
+      margin: 56px 0 0;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .specials-banner .icon { font-size: 32px; flex-shrink: 0; }
+
+    .specials-banner h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 22px;
+      font-weight: 400;
+      margin-bottom: 4px;
+    }
+
+    .specials-banner p {
+      font-size: 13px;
+      color: var(--dune);
+      line-height: 1.5;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--ink);
+      color: var(--mist);
+      text-align: center;
+      padding: 36px 24px;
+      font-size: 12px;
+      letter-spacing: 0.06em;
+      line-height: 1.8;
+    }
+
+    footer strong {
+      display: block;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 20px;
+      font-weight: 300;
+      color: var(--dune);
+      margin-bottom: 8px;
+    }
+
+    @media (max-width: 480px) {
+      .specials-banner { flex-direction: column; text-align: center; }
+      nav a { padding: 12px 14px; font-size: 10px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- HERO -->
+<header>
+  <p class="restaurant-eyebrow">Est. 2024 &nbsp;·&nbsp; Bord de mer</p>
+  <h1 class="restaurant-name">Sablettes</h1>
+  <p class="restaurant-tagline">Cuisine du littoral — fraîche & généreuse</p>
+</header>
+<svg class="wave" viewBox="0 0 1440 48" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M0 0 Q360 48 720 24 Q1080 0 1440 36 L1440 48 L0 48Z" fill="currentColor"/>
+</svg>
+
+<!-- STICKY NAV -->
+<div class="nav-wrap">
+  <nav>
+    <a href="#starters">Starters</a>
+    <a href="#mains">Mains</a>
+    <a href="#seafood">Seafood</a>
+    <a href="#sides">Sides</a>
+    <a href="#desserts">Desserts</a>
+    <a href="#drinks">Drinks</a>
+  </nav>
+</div>
+
+<main>
+
+  <!-- ── STARTERS ── -->
+  <section class="menu-section" id="starters">
+    <div class="section-header">
+      <span class="section-line"></span>
+      <h2 class="section-title">Starters</h2>
+      <span class="section-icon">🌿</span>
+      <span class="section-line"></span>
+    </div>
+    <div class="dish-list">
+
+      <div class="dish">
+        <div class="dish-name">
+          Bruschetta aux Tomates
+          <span class="dish-badges"><span class="badge badge-veg">V</span></span>
+        </div>
+        <div class="dish-desc">Grilled sourdough, heritage tomatoes, basil oil, aged balsamic</div>
+        <div class="dish-price">650 DA</div>
+      </div>
+
+      <div class="dish">
+        <div class="dish-name">
+          Soupe de Poisson
+          <span class="dish-badges"><span class="badge badge-new">New</span></span>
+        </div>
+        <div class="dish-desc">Daily catch bisque, rouille, gruyère croûtons</div>
+        <div class="dish-price">900 DA</div>
+      </div>
+
+      <div class="dish">
+        <div class="dish-name">Salade Niçoise</div>
+        <div class="dish-desc">Seared tuna, haricots verts, olives, soft egg, anchovy vinaigrette</div>
+        <div class="dish-price">1 100 DA</div>
+      </div>
+
+      <div class="dish">
+        <div class="dish-name">Houmous Maison
+          <span class="dish-badges"><span class="badge badge-veg">V</span></span>
+        </div>
+        <div class="dish-desc">Smoked chickpea, olive oil, paprika, warm flatbread</div>
+        <div class="dish-price">750 DA</div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── MAINS ── -->
+  <section class="menu-section" id="mains">
+    <div class="section-header">
+      <span class="section-line"></span>
+      <h2 class="section-title">Mains</h2>
+      <span class="section-icon">🍽️</span>
+      <span class="section-line"></span>
+    </div>
+    <div class="dish-list">
+
+      <div class="dish">
+        <div class="dish-name">Poulet Rôti aux Herbes</div>
+        <div class="dish-desc">Free-range half chicken, rosemary jus, roasted garlic, gratin dauphinois</div>
+        <div class="dish-price">1 800 DA</div>
+      </div>
+
+      <div class="dish">
+        <div class="dish-name">Pasta Puttanesca
+          <span class="dish-badges"><span class="badge badge-veg">V</span><span class="badge badge-spicy">Spicy</span></span>
+        </div>
+        <div class="dish-desc">Spaghetti, olives, capers, chilli, San Marzano tomato</div>
+        <div class="dish-price">1 400 DA</div>
+      </div>
+
+      <div class="dish">
+        <div class="dish-name">Entrecôte Grillée</div>
+        <div class="dish-desc">250 g Black Angus rib-eye, herb butter, fries, green salad</div>
+        <div class="dish-price">2 600 DA</div>
+      </div>
+
+      <div class="dish">
+        <div class="dish-name">Tajine Végétarien
+          <span class="dish-badges"><span class="badge badge-veg">V</span></span>
+        </div>
+        <div class="dish-desc">Slow-cooked seasonal vegetables, preserved lemon, harissa, couscous</div>
+        <div class="dish-price">1 500 DA</div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── SEAFOOD ── -->
+  <section class="menu-section" id="seafood">
+    <div class="section-header">
+      <span class="section-line"></span>
+      <h2 class="section-title">Seafood</h2>
+      <span class="section-icon">🐟</span>
+      <span class="section-line"></span>
+    </div>
+    <div class="dish-list">
+
+      <div class="dish">
+        <div class="dish-name">Dorade Grillée
+          <span class="dish-badges"><span class="badge badge-new">New</span></span>
+        </div>
+        <div class="dish-desc">Whole sea bream, lemon-caper butter, fennel salad, grilled lemon</div>
+        <div class="dish-price">2 200 DA</div>
+      </div>
+
+      <div class="dish">
+        <div class="dish-name">Crevettes Sautées</div>
+        <div class="dish-desc">Tiger prawns, garlic, white wine, parsley, crusty bread</div>
+        <div class="dish-price">2 000 DA</div>
+      </div>
+
+      <div class="dish">
+        <div class="dish-name">Calamars Frits</div>
+        <div class="dish-desc">Lightly battered squid, smoked aioli, lemon wedge</div>
+        <div class="dish-price">1 600 DA</div>
+      </div>
+
+      <div class="dish">
+        <div class="dish-name">Plateau de Fruits de Mer</div>
+        <div class="dish-desc">Chef's selection of fresh shellfish on ice — served for two</div>
+        <div class="dish-price">4 800 DA</div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── SIDES ── -->
+  <section class="menu-section" id="sides">
+    <div class="section-header">
+      <span class="section-line"></span>
+      <h2 class="section-title">Sides</h2>
+      <span class="section-icon">🥗</span>
+      <span class="section-line"></span>
+    </div>
+    <div class="dish-list">
+
+      <div class="dish">
+        <div class="dish-name">Frites Maison</div>
+        <div class="dish-desc">Hand-cut, twice-fried, sea salt</div>
+        <div class="dish-price">450 DA</div>
+      </div>
+
+      <div class="dish">
+        <div class="dish-name">Légumes Rôtis
+          <span class="dish-badges"><span class="badge badge-veg">V</span></span>
+        </div>
+        <div class="dish-desc">Seasonal vegetables, olive oil, thyme</div>
+        <div class="dish-price">500 DA</div>
+      </div>
+
+      <div class="dish">
+        <div class="dish-name">Salade Verte</div>
+        <div class="dish-desc">Mixed leaves, shallots, Dijon vinaigrette</div>
+        <div class="dish-price">400 DA</div>
+      </div>
+
+      <div class="dish">
+        <div class="dish-name">Riz Pilaf</div>
+        <div class="dish-desc">Basmati, saffron, toasted almonds</div>
+        <div class="dish-price">450 DA</div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── DESSERTS ── -->
+  <section class="menu-section" id="desserts">
+    <div class="section-header">
+      <span class="section-line"></span>
+      <h2 class="section-title">Desserts</h2>
+      <span class="section-icon">🍮</span>
+      <span class="section-line"></span>
+    </div>
+    <div class="dish-list">
+
+      <div class="dish">
+        <div class="dish-name">Crème Brûlée</div>
+        <div class="dish-desc">Classic vanilla custard, caramelised sugar crust</div>
+        <div class="dish-price">700 DA</div>
+      </div>
+
+      <div class="dish">
+        <div class="dish-name">Moelleux au Chocolat</div>
+        <div class="dish-desc">Warm chocolate fondant, salted caramel, vanilla ice cream</div>
+        <div class="dish-price">850 DA</div>
+      </div>
+
+      <div class="dish">
+        <div class="dish-name">Cornes de Gazelle
+          <span class="dish-badges"><span class="badge badge-new">New</span></span>
+        </div>
+        <div class="dish-desc">Almond-filled pastry crescents, orange blossom, powdered sugar</div>
+        <div class="dish-price">600 DA</div>
+      </div>
+
+      <div class="dish">
+        <div class="dish-name">Fruit de Saison</div>
+        <div class="dish-desc">Chef's fresh fruit selection, mint syrup</div>
+        <div class="dish-price">500 DA</div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── DRINKS ── -->
+  <section class="menu-section" id="drinks">
+    <div class="section-header">
+      <span class="section-line"></span>
+      <h2 class="section-title">Drinks</h2>
+      <span class="section-icon">🥤</span>
+      <span class="section-line"></span>
+    </div>
+    <div class="dish-list">
+
+      <div class="dish">
+        <div class="dish-name">Limonade Maison</div>
+        <div class="dish-desc">Fresh lemon, mint, sparkling water</div>
+        <div class="dish-price">350 DA</div>
+      </div>
+
+      <div class="dish">
+        <div class="dish-name">Jus d'Orange Frais</div>
+        <div class="dish-desc">Squeezed to order</div>
+        <div class="dish-price">400 DA</div>
+      </div>
+
+      <div class="dish">
+        <div class="dish-name">Café Espresso</div>
+        <div class="dish-desc">Single origin, medium roast</div>
+        <div class="dish-price">200 DA</div>
+      </div>
+
+      <div class="dish">
+        <div class="dish-name">Thé à la Menthe</div>
+        <div class="dish-desc">Loose-leaf gunpowder green, fresh mint, sugar on request</div>
+        <div class="dish-price">250 DA</div>
+      </div>
+
+      <div class="dish">
+        <div class="dish-name">Eau Minérale</div>
+        <div class="dish-desc">Still or sparkling — 50 cl bottle</div>
+        <div class="dish-price">150 DA</div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SPECIALS BANNER -->
+  <div class="specials-banner">
+    <div class="icon">🌊</div>
+    <div>
+      <h3>Plat du Jour — Daily Special</h3>
+      <p>Ask your server for today's catch and seasonal dish.<br>Fresh, local, and changes every day.</p>
+    </div>
+  </div>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <strong>Sablettes</strong>
+  📍 Front de mer, Oran &nbsp;·&nbsp; 📞 +213 41 000 000<br>
+  Open daily 12 h – 23 h<br><br>
+  <span style="font-size:11px;opacity:.6;">Prices in DZD · All dishes subject to availability · Ask about allergens</span>
+</footer>
+
+<script>
+  // Highlight active nav link on scroll
+  const sections = document.querySelectorAll('.menu-section');
+  const links    = document.querySelectorAll('nav a');
+
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        links.forEach(l => l.classList.remove('active'));
+        const active = document.querySelector(`nav a[href="#${e.target.id}"]`);
+        if (active) {
+          active.classList.add('active');
+          active.scrollIntoView({ inline: 'center', behavior: 'smooth' });
+        }
+      }
+    });
+  }, { rootMargin: '-40% 0px -55% 0px' });
+
+  sections.forEach(s => observer.observe(s));
+</script>
+</body>
+</html>
