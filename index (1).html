@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Quik Food — Menu</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --red:    #C0273A;
+      --green:  #2A7A4B;
+      --cream:  #F5EFE0;
+      --paper:  #FAF6EF;
+      --ink:    #1A1A18;
+      --mist:   #6B7280;
+      --white:  #FFFFFF;
+    }
+
+    body {
+      background: var(--paper);
+      color: var(--ink);
+      font-family: 'Poppins', sans-serif;
+      font-weight: 300;
+    }
+
+    /* HEADER */
+    header {
+      background: var(--white);
+      text-align: center;
+      padding: 32px 20px 0;
+      border-bottom: 3px solid var(--red);
+    }
+
+    .chef-hat { font-size: 36px; margin-bottom: 4px; }
+
+    .brand-sub {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--green);
+      margin-bottom: 2px;
+    }
+
+    .brand-name {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(56px, 14vw, 100px);
+      color: var(--red);
+      letter-spacing: 0.04em;
+      line-height: 1;
+    }
+
+    .brand-tagline {
+      font-size: 11px;
+      font-weight: 400;
+      color: var(--mist);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 10px 0 20px;
+    }
+
+    /* DELIVERY BANNER */
+    .delivery-bar {
+      background: var(--red);
+      color: var(--white);
+      text-align: center;
+      padding: 10px 16px;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+    }
+
+    .delivery-bar span { opacity: .85; font-weight: 400; }
+
+    /* STICKY NAV */
+    .nav-wrap {
+      position: sticky;
+      top: 0;
+      z-index: 99;
+      background: var(--white);
+      border-bottom: 2px solid var(--cream);
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+    .nav-wrap::-webkit-scrollbar { display: none; }
+
+    nav {
+      display: flex;
+      justify-content: center;
+      min-width: max-content;
+      margin: 0 auto;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: var(--mist);
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      padding: 13px 16px;
+      white-space: nowrap;
+      border-bottom: 3px solid transparent;
+      transition: color .2s, border-color .2s;
+    }
+    nav a:hover, nav a.active {
+      color: var(--red);
+      border-bottom-color: var(--red);
+    }
+
+    /* MAIN */
+    main { max-width: 680px; margin: 0 auto; padding: 0 16px 72px; }
+
+    /* SECTION */
+    .menu-section { padding-top: 48px; }
+
+    .section-head {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+
+    .section-head hr { flex: 1; border: none; border-top: 1px solid #ddd; }
+
+    .section-label {
+      background: var(--red);
+      color: var(--white);
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 22px;
+      letter-spacing: 0.12em;
+      padding: 4px 18px 2px;
+      border-radius: 3px;
+      white-space: nowrap;
+    }
+
+    .section-icon { font-size: 20px; }
+
+    /* DISH ROW */
+    .dish-list { display: flex; flex-direction: column; }
+
+    .dish {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      grid-template-rows: auto auto;
+      column-gap: 12px;
+      padding: 14px 0;
+      border-bottom: 1px dashed #E0D9CC;
+    }
+    .dish:last-child { border-bottom: none; }
+
+    .dish-name {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--ink);
+      grid-column: 1;
+      grid-row: 1;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .dish-desc {
+      font-size: 12px;
+      color: var(--mist);
+      grid-column: 1;
+      grid-row: 2;
+      margin-top: 2px;
+      line-height: 1.5;
+    }
+
+    .dish-price {
+      background: var(--green);
+      color: var(--white);
+      font-size: 12px;
+      font-weight: 700;
+      padding: 4px 8px;
+      border-radius: 4px;
+      grid-column: 2;
+      grid-row: 1 / 3;
+      align-self: center;
+      white-space: nowrap;
+      letter-spacing: 0.03em;
+    }
+
+    /* FOOTER */
+    footer {
+      background: var(--red);
+      color: rgba(255,255,255,0.9);
+      text-align: center;
+      padding: 28px 20px;
+      font-size: 12px;
+      line-height: 2;
+    }
+    footer strong {
+      display: block;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 28px;
+      letter-spacing: 0.1em;
+      color: var(--white);
+    }
+
+    @media (max-width: 400px) {
+      .dish-name { font-size: 13px; }
+      nav a { padding: 12px 11px; font-size: 9px; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="chef-hat">👨‍🍳</div>
+  <p class="brand-sub">Food &amp; Glace</p>
+  <h1 class="brand-name">Quik Food</h1>
+  <p class="brand-tagline">Menu complet — Sandwiches · Pizza · Plats · Grillades · Glaces</p>
+</header>
+
+<div class="delivery-bar">
+  🛵 Delivery Order &nbsp;<span>0774-89-93-15</span>
+</div>
+
+<div class="nav-wrap">
+  <nav>
+    <a href="#sandwiches">Sandwiches</a>
+    <a href="#pizza">Pizza</a>
+    <a href="#plats">Plats</a>
+    <a href="#grillades">Grillades</a>
+    <a href="#glaces">Glaces</a>
+  </nav>
+</div>
+
+<main>
+
+  <!-- SANDWICHES -->
+  <section class="menu-section" id="sandwiches">
+    <div class="section-head">
+      <hr/><span class="section-label">🥖 Sandwiches</span><hr/>
+    </div>
+    <div class="dish-list">
+      <div class="dish">
+        <div class="dish-name">Fritte Omlette</div>
+        <div class="dish-price">200 DA</div>
+      </div>
+      <div class="dish">
+        <div class="dish-name">Fritte Poulé</div>
+        <div class="dish-price">400 DA</div>
+      </div>
+      <div class="dish">
+        <div class="dish-name">Kebab</div>
+        <div class="dish-price">400 DA</div>
+      </div>
+      <div class="dish">
+        <div class="dish-name">Spécial</div>
+        <div class="dish-price">300 DA</div>
+      </div>
+      <div class="dish">
+        <div class="dish-name">Hamburger</div>
+        <div class="dish-price">250 DA</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PIZZA -->
+  <section class="menu-section" id="pizza">
+    <div class="section-head">
+      <hr/><span class="section-label">🍕 Pizza</span><hr/>
+    </div>
+    <div class="dish-list">
+      <div class="dish">
+        <div class="dish-name">Margueritte</div>
+        <div class="dish-desc">sauce tomate + fromage + olives</div>
+        <div class="dish-price">500 DA</div>
+      </div>
+      <div class="dish">
+        <div class="dish-name">Royale</div>
+        <div class="dish-desc">sauce tomate + viande hachée + fromage + olives</div>
+        <div class="dish-price">700 DA</div>
+      </div>
+      <div class="dish">
+        <div class="dish-name">Végétarienne</div>
+        <div class="dish-desc">sauce tomate + maïs + poivre vert + oignon + champignon + fromage + olives</div>
+        <div class="dish-price">600 DA</div>
+      </div>
+      <div class="dish">
+        <div class="dish-name">Thon Viande Hachée</div>
+        <div class="dish-desc">sauce tomate + viande hachée + thon + fromage + olives</div>
+        <div class="dish-price">800 DA</div>
+      </div>
+      <div class="dish">
+        <div class="dish-name">Champignon</div>
+        <div class="dish-desc">sauce tomate + champignon + viande hachée + fromage + olives</div>
+        <div class="dish-price">700 DA</div>
+      </div>
+      <div class="dish">
+        <div class="dish-name">Méga</div>
+        <div class="dish-desc">tous les ingrédients — bordure fromage + olives</div>
+        <div class="dish-price">2000 DA</div>
+      </div>
+      <div class="dish">
+        <div class="dish-name">Géant</div>
+        <div class="dish-price">1500 DA</div>
+      </div>
+      <div class="dish">
+        <div class="dish-name">Tacos</div>
+        <div class="dish-price">600 DA</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PLATS -->
+  <section class="menu-section" id="plats">
+    <div class="section-head">
+      <hr/><span class="section-label">🍽️ Plats</span><hr/>
+    </div>
+    <div class="dish-list">
+      <div class="dish">
+        <div class="dish-name">Kebab</div>
+        <div class="dish-desc">kebab + fritte + salade + fromage</div>
+        <div class="dish-price">700 DA</div>
+      </div>
+      <div class="dish">
+        <div class="dish-name">Spéciale</div>
+        <div class="dish-desc">fritte + œuf + viande hachée + salade + fromage</div>
+        <div class="dish-price">700 DA</div>
+      </div>
+      <div class="dish">
+        <div class="dish-name">Fritte Omlette</div>
+        <div class="dish-desc">fritte + œuf + fromage</div>
+        <div class="dish-price">300 DA</div>
+      </div>
+      <div class="dish">
+        <div class="dish-name">Ordef</div>
+        <div class="dish-price">250 DA</div>
+      </div>
+      <div class="dish">
+        <div class="dish-name">Ordef Spécial</div>
+        <div class="dish-price">300 DA</div>
+      </div>
+      <div class="dish">
+        <div class="dish-name">Fritte Poulet</div>
+        <div class="dish-desc">fritte + poulet</div>
+        <div class="dish-price">500 DA</div>
+      </div>
+      <div class="dish">
+        <div class="dish-name">Poulet Garnier</div>
+        <div class="dish-desc">fritte + salade + boisson + poulet rôti + fromage + olive</div>
+        <div class="dish-price">2000 DA</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GRILLADES -->
+  <section class="menu-section" id="grillades">
+    <div class="section-head">
+      <hr/><span class="section-label">🔥 Grillades</span><hr/>
+    </div>
+    <div class="dish-list">
+      <div class="dish">
+        <div class="dish-name">Viande</div>
+        <div class="dish-price">70 DA</div>
+      </div>
+      <div class="dish">
+        <div class="dish-name">Escalope</div>
+        <div class="dish-price">70 DA</div>
+      </div>
+      <div class="dish">
+        <div class="dish-name">Merguaz</div>
+        <div class="dish-price">100 DA</div>
+      </div>
+      <div class="dish">
+        <div class="dish-name">Viande Hachée</div>
+        <div class="dish-price">100 DA</div>
+      </div>
+      <div class="dish">
+        <div class="dish-name">Poulet</div>
+        <div class="dish-price">1000 DA</div>
+      </div>
+      <div class="dish">
+        <div class="dish-name">Tranche d'Escalope</div>
+        <div class="dish-price">500 DA</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GLACES -->
+  <section class="menu-section" id="glaces">
+    <div class="section-head">
+      <hr/><span class="section-label">🍦 Glaces</span><hr/>
+    </div>
+    <div class="dish-list">
+      <div class="dish">
+        <div class="dish-name">Mini Pau de Glace</div>
+        <div class="dish-price">100 DA</div>
+      </div>
+      <div class="dish">
+        <div class="dish-name">Grand Pau de Glace</div>
+        <div class="dish-price">200 DA</div>
+      </div>
+      <div class="dish">
+        <div class="dish-name">Eskimo</div>
+        <div class="dish-price">80 DA</div>
+      </div>
+      <div class="dish">
+        <div class="dish-name">Cornito</div>
+        <div class="dish-price">80 DA</div>
+      </div>
+      <div class="dish">
+        <div class="dish-name">Coupe</div>
+        <div class="dish-price">350 DA</div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <strong>Quik Food</strong>
+  🛵 Delivery Order : 0774-89-93-15
+</footer>
+
+<script>
+  const sections = document.querySelectorAll('.menu-section');
+  const links    = document.querySelectorAll('nav a');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        links.forEach(l => l.classList.remove('active'));
+        const a = document.querySelector(`nav a[href="#${e.target.id}"]`);
+        if (a) { a.classList.add('active'); a.scrollIntoView({ inline: 'center', behavior: 'smooth' }); }
+      }
+    });
+  }, { rootMargin: '-40% 0px -55% 0px' });
+  sections.forEach(s => observer.observe(s));
+</script>
+</body>
+</html>
