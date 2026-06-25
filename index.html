@@ -166,6 +166,56 @@
       white-space: nowrap;
     }
 
+    /* ── SUPPLEMENT BLOCK ── */
+    .supplement-block {
+      margin-top: 12px;
+      padding: 16px 18px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+    }
+
+    .supplement-title {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 10px;
+    }
+
+    .supplement-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .supplement-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .supplement-item span.sup-name {
+      color: var(--text);
+      font-weight: 400;
+    }
+
+    .supplement-item span.sup-price {
+      color: var(--accent);
+      font-family: 'Playfair Display', serif;
+      font-size: 12px;
+    }
+
+    .supplement-item::after {
+      content: '·';
+      color: var(--border);
+      margin-left: 2px;
+    }
+    .supplement-item:last-child::after { display: none; }
+
     /* ── FOOTER ── */
     footer {
       background: var(--surface);
@@ -206,6 +256,7 @@
     <a href="#pizza">Pizza</a>
     <a href="#plats">Plats</a>
     <a href="#grillades">Grillades</a>
+    <a href="#crepes">Crêpes</a>
     <a href="#glaces">Glaces</a>
   </nav>
 </div>
@@ -222,7 +273,7 @@
     <div class="dish-list">
       <div class="dish">
         <div class="dish-name">Fritte Omlette</div>
-        <div class="dish-price">200 DA</div>
+        <div class="dish-price">250 DA</div>
       </div>
       <div class="dish">
         <div class="dish-name">Fritte Poulé</div>
@@ -234,11 +285,11 @@
       </div>
       <div class="dish">
         <div class="dish-name">Spécial</div>
-        <div class="dish-price">300 DA</div>
+        <div class="dish-price">400 DA</div>
       </div>
       <div class="dish">
         <div class="dish-name">Hamburger</div>
-        <div class="dish-price">250 DA</div>
+        <div class="dish-price">300 DA</div>
       </div>
     </div>
   </section>
@@ -371,6 +422,90 @@
     </div>
   </section>
 
+  <!-- CRÊPES -->
+  <section class="menu-section" id="crepes">
+    <div class="section-head">
+      <span class="section-line"></span>
+      <span class="section-title">Crêpes</span>
+      <span class="section-line"></span>
+    </div>
+    <div class="dish-list">
+      <div class="dish">
+        <div class="dish-name">Chocolat</div>
+        <div class="dish-price">300 DA</div>
+      </div>
+      <div class="dish">
+        <div class="dish-name">Chocolat Banane</div>
+        <div class="dish-price">400 DA</div>
+      </div>
+      <div class="dish">
+        <div class="dish-name">3 Fruits</div>
+        <div class="dish-price">750 DA</div>
+      </div>
+      <div class="dish">
+        <div class="dish-name">Crêpes Oreo</div>
+        <div class="dish-price">450 DA</div>
+      </div>
+      <div class="dish">
+        <div class="dish-name">Crêpes Kit Kat</div>
+        <div class="dish-price">450 DA</div>
+      </div>
+      <div class="dish">
+        <div class="dish-name">Crêpes Bouino</div>
+        <div class="dish-price">450 DA</div>
+      </div>
+      <div class="dish">
+        <div class="dish-name">Crêpes Nutella</div>
+        <div class="dish-price">600 DA</div>
+      </div>
+      <div class="dish">
+        <div class="dish-name">Crêpes Croustillant</div>
+        <div class="dish-price">300 DA</div>
+      </div>
+
+      <!-- Gaufres -->
+      <div class="dish">
+        <div class="dish-name">Gaufres Chocolat</div>
+        <div class="dish-price">450 DA</div>
+      </div>
+      <div class="dish">
+        <div class="dish-name">Gaufres Nutella</div>
+        <div class="dish-price">600 DA</div>
+      </div>
+
+      <!-- Plats -->
+      <div class="dish">
+        <div class="dish-name">Plat Maison</div>
+        <div class="dish-desc">2 crêpes · 1 gaufre · 3 fruits · Kit Kat · Bouino · Oreo</div>
+        <div class="dish-price">1 800 DA</div>
+      </div>
+      <div class="dish">
+        <div class="dish-name">Plat Mixte</div>
+        <div class="dish-desc">1 crêpe · ½ gaufre · 2 fruits · barquette chocolat</div>
+        <div class="dish-price">700 DA</div>
+      </div>
+      <div class="dish">
+        <div class="dish-name">Plat Mixte Royal</div>
+        <div class="dish-desc">1 crêpe · 1 gaufre · 3 fruits · chocolat au choix</div>
+        <div class="dish-price">1 200 DA</div>
+      </div>
+    </div>
+
+    <!-- Suppléments -->
+    <div class="supplement-block">
+      <div class="supplement-title">Suppléments</div>
+      <div class="supplement-list">
+        <div class="supplement-item"><span class="sup-name">Banane</span>&nbsp;<span class="sup-price">+100 DA</span></div>
+        <div class="supplement-item"><span class="sup-name">Ananas</span>&nbsp;<span class="sup-price">+100 DA</span></div>
+        <div class="supplement-item"><span class="sup-name">Pêche</span>&nbsp;<span class="sup-price">+100 DA</span></div>
+        <div class="supplement-item"><span class="sup-name">Bouino</span>&nbsp;<span class="sup-price">+200 DA</span></div>
+        <div class="supplement-item"><span class="sup-name">Kit Kat</span>&nbsp;<span class="sup-price">+150 DA</span></div>
+        <div class="supplement-item"><span class="sup-name">Oreo</span>&nbsp;<span class="sup-price">+150 DA</span></div>
+        <div class="supplement-item"><span class="sup-name">Nutella</span>&nbsp;<span class="sup-price">+200 DA</span></div>
+      </div>
+    </div>
+  </section>
+
   <!-- GLACES -->
   <section class="menu-section" id="glaces">
     <div class="section-head">
@@ -398,6 +533,10 @@
       <div class="dish">
         <div class="dish-name">Coupe</div>
         <div class="dish-price">350 DA</div>
+      </div>
+      <div class="dish">
+        <div class="dish-name">Panaché</div>
+        <div class="dish-price">200 DA</div>
       </div>
     </div>
   </section>
